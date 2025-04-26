@@ -1,18 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-
-const app = express();
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
-  })
-);
-app.use(express.json({ limit: "20kb" }));
-app.use(express.urlencoded({ extended: true, limit: "20kb" }));
-app.use(express.static("public"));
-app.use(cookieParser());
+import { globalErrorHandler } from "./middlewares/error.middleware.js";
 
 // imoort routes
 
@@ -29,6 +18,18 @@ import remarkRoutes from "./routes/departmentManager/accountDep/remark.routes.js
 import adminRoutes from "./routes/admin/admin.routes.js";
 import adminFormRoutes from "./routes/admin/formRoutes/adminNocCertifiedCopy.routes.js";
 
+const app = express();
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
+  })
+);
+app.use(express.json({ limit: "20kb" }));
+app.use(express.urlencoded({ extended: true, limit: "20kb" }));
+app.use(express.static("public"));
+app.use(cookieParser());
+
 // routers declaration
 //user routes
 app.use("/api/v1/users", userRoutes);
@@ -43,5 +44,5 @@ app.use("/api/v1/department-managers", remarkRoutes);
 //user routes
 app.use("/api/v1/admin", adminRoutes);
 app.use("/api/v1/admin", adminFormRoutes);
-
+app.use(globalErrorHandler);
 export { app };

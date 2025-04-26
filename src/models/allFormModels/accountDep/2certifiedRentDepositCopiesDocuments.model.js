@@ -20,7 +20,7 @@ const certifiedRentDepositCopiesDocumentsSchema = new Schema(
     otherDocument: {
       type: String,
     },
-    submit: {
+    IsSubmit: {
       type: Boolean,
       default: false,
     },

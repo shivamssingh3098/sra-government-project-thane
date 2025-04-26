@@ -3,6 +3,8 @@ import {
   MUNICIPAL_CORPORATIONS,
   DEPARTMENT,
   SERVICES_STATUS,
+  CITY_COUNCIL,
+  VILLAGE_COUNCIL,
 } from "../../../constants.js";
 const nocCertifiedCopySchema = new Schema(
   {
@@ -38,7 +40,7 @@ const nocCertifiedCopySchema = new Schema(
       type: String,
       required: true,
     },
-    submit: {
+    IsSubmit: {
       type: Boolean,
       default: false,
     },
@@ -99,9 +101,20 @@ const nocCertifiedCopySchema = new Schema(
     },
     municipalCorporation: {
       type: String,
-      required: true,
+      // required: true,
       enum: MUNICIPAL_CORPORATIONS,
     },
+    cityCouncil: {
+      type: String,
+      // required: true,
+      enum: CITY_COUNCIL,
+    },
+    villageCouncil: {
+      type: String,
+      // required: true,
+      enum: VILLAGE_COUNCIL,
+    },
+    // need to do in all form
     department: {
       type: String,
       required: true,

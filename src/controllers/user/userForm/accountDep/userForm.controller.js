@@ -1,3 +1,4 @@
+import { DEPARTMENT, MUNICIPAL_CORPORATIONS } from "../../../../constants.js";
 import { NocCertifiedCopy } from "../../../../models/allFormModels/accountDep/NocCertifiedCopy.model.js";
 import { NocCertifiedCopyDocuments } from "../../../../models/allFormModels/accountDep/nocCertifiedCopyDocumentes.model.js";
 import { DepartmentManager } from "../../../../models/departmentManager/departmentManager.model.js";
@@ -14,14 +15,26 @@ const createNocCertifiedCopy = asyncHandler(async (req, res) => {
       applyDate,
       phone,
       city,
-      landNumber,
+
       address,
       taluka,
       village,
-      sectorNo,
-      municipalCorporation,
+
       department,
       governmentServiceBranch,
+      //optional
+      sectorNo,
+      wardNo,
+      //end optional
+
+      //optional
+      landNumber,
+      surveyNo,
+      finalPlot,
+      //optional
+      municipalCorporation,
+      cityCouncil,
+      villageCouncil,
     } = req.body;
 
     console.log("req.files", req.file);
@@ -31,18 +44,54 @@ const createNocCertifiedCopy = asyncHandler(async (req, res) => {
         applyDate,
         phone,
         city,
-        landNumber,
+
         address,
         taluka,
         village,
-        sectorNo,
-        municipalCorporation,
+
         department,
         governmentServiceBranch,
       ].some((field) => field?.trim() === "")
     ) {
       throw new ApiError(400, "All fields are required");
     }
+
+    if (!sectorNo && !wardNo) {
+      throw new ApiError(400, "sectorNo or wardNo fields are required");
+    }
+
+    if (!landNumber && !surveyNo && !finalPlot) {
+      throw new ApiError(
+        400,
+        "landNumber or surveyNo or finalPlot fields are required"
+      );
+    }
+
+    if (
+      (!municipalCorporation || municipalCorporation === "NONE") &&
+      (!cityCouncil || cityCouncil === "NONE") &&
+      (!villageCouncil || villageCouncil === "NONE")
+    ) {
+      throw new ApiError(
+        400,
+        "municipalCorporation or cityCouncil or villageCouncil fields are required"
+      );
+    }
+
+    if (!DEPARTMENT.includes(department)) {
+      throw new ApiError(
+        401,
+
+        `Invalid serviceStatus. Allowed values: ${DEPARTMENT.join(", ")}`
+      );
+    }
+    // if (!MUNICIPAL_CORPORATIONS.includes(municipalCorporation)) {
+    //   throw new ApiError(
+    //     401,
+
+    //     `Invalid serviceStatus. Allowed values: ${MUNICIPAL_CORPORATIONS.join(", ")}`
+    //   );
+    // }
 
     const departmentManager = await DepartmentManager.findOne(
       { department },
@@ -59,14 +108,20 @@ const createNocCertifiedCopy = asyncHandler(async (req, res) => {
       applyDate,
       phone,
       city,
-      landNumber,
+
       address,
       taluka,
       village,
-      sectorNo,
+      cityCouncil,
+      villageCouncil,
       municipalCorporation,
       department,
       governmentServiceBranch,
+      landNumber,
+      surveyNo,
+      finalPlot,
+      sectorNo,
+      wardNo,
       submit: true,
       userId: req.user._id,
       applicationId: applicationId,

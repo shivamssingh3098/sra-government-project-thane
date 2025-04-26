@@ -1,7 +1,6 @@
 export const DB_NAME = "slum-rehabilitation-authority";
 
 export const MUNICIPAL_CORPORATIONS = [
-  "MUMBAI",
   "THANE",
   "KALYAN-DOMBIVALI",
   "NAVI-MUMBAI",
@@ -10,8 +9,22 @@ export const MUNICIPAL_CORPORATIONS = [
   "VASAI-VIRAR",
   "MIRA-BHAYANDAR",
   "PANVEL",
+  "NONE",
+];
+export const CITY_COUNCIL = [
+  "AMBERNATH",
+  "KULGAON-BADLAPUR",
+  "ALIBAG",
+  "PEN",
+  "ULHASNAGAR",
+  "KHOPOLI",
+  "MATHERAN",
+  "KARJAT",
+  "PALGHAR",
+  "NONE",
 ];
 
+export const VILLAGE_COUNCIL = ["BOISAR", "NONE"];
 export const DEPARTMENT = [
   "AD",
   "TPD",

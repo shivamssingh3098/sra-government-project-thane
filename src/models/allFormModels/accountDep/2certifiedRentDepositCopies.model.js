@@ -3,6 +3,8 @@ import {
   MUNICIPAL_CORPORATIONS,
   DEPARTMENT,
   SERVICES_STATUS,
+  CITY_COUNCIL,
+  VILLAGE_COUNCIL,
 } from "../../../constants.js";
 const certifiedRentDepositCopiesSchema = new Schema(
   {
@@ -38,7 +40,7 @@ const certifiedRentDepositCopiesSchema = new Schema(
       type: String,
       required: true,
     },
-    submit: {
+    IsSubmit: {
       type: Boolean,
       default: false,
     },
@@ -71,10 +73,6 @@ const certifiedRentDepositCopiesSchema = new Schema(
       type: String,
       required: true,
     },
-    landNumber: {
-      type: String,
-      required: true,
-    },
 
     address: {
       type: String,
@@ -88,20 +86,54 @@ const certifiedRentDepositCopiesSchema = new Schema(
       type: String,
       required: true,
     },
-    sectorNo: {
+
+    // area code
+    landNumber: {
       type: String,
       required: true,
     },
+    surveyNo: {
+      type: String,
+    },
+    finalPlot: {
+      type: String,
+    },
+
+    //
+
+    //
+    sectorNo: {
+      type: String,
+      //   required: true,
+    },
+    wardNo: {
+      type: String,
+    },
+
     governmentServiceBranch: {
       // need to add in controller
       type: String,
       required: true,
     },
+
+    //new
     municipalCorporation: {
       type: String,
-      required: true,
+      default: "NONE",
       enum: MUNICIPAL_CORPORATIONS,
     },
+    cityCouncil: {
+      type: String,
+      default: "NONE",
+      enum: CITY_COUNCIL,
+    },
+    villageCouncil: {
+      type: String,
+      default: "NONE",
+      enum: VILLAGE_COUNCIL,
+    },
+    // need to do in all form
+    // new end
     department: {
       type: String,
       required: true,

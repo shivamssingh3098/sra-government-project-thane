@@ -27,8 +27,6 @@ router
 
 // certified rent deposit copies
 
-// router.route("/register").post(upload.single("profileImage"), registerUser);
-
 router
   .route("/all-pending-request-for-certified-rent-deposit-copies2")
   .get(
