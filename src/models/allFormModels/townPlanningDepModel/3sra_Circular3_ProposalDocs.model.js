@@ -6,7 +6,7 @@ import {
   CITY_COUNCIL,
   VILLAGE_COUNCIL,
 } from "../../../constants.js";
-const certifiedRentDepositCopiesSchema = new Schema(
+const sra_Circular3_ProposalDocsSchema = new Schema(
   {
     name: {
       type: String,
@@ -43,10 +43,6 @@ const certifiedRentDepositCopiesSchema = new Schema(
     IsSubmit: {
       type: Boolean,
       default: false,
-    },
-    schemeDeveloper: {
-      type: String,
-      required: true,
     },
     remark: {
       type: Schema.Types.ObjectId,
@@ -154,7 +150,7 @@ const certifiedRentDepositCopiesSchema = new Schema(
     timestamps: true,
   }
 );
-export const CertifiedRentDepositCopies2 = mongoose.model(
-  "CertifiedRentDepositCopies2",
-  certifiedRentDepositCopiesSchema
+export const SRA_Circular3_ProposalDocs3 = mongoose.model(
+  "SRA_Circular3_ProposalDocs3",
+  sra_Circular3_ProposalDocsSchema
 );

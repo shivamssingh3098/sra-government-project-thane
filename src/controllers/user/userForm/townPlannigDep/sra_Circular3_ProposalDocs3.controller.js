@@ -1,8 +1,7 @@
 import { DEPARTMENT, MUNICIPAL_CORPORATIONS } from "../../../../constants.js";
-import { CertifiedRentDepositCopies2 } from "../../../../models/allFormModels/accountDep/2certifiedRentDepositCopies.model.js";
-import { CertifiedRentDepositCopiesDocuments } from "../../../../models/allFormModels/accountDep/2certifiedRentDepositCopiesDocuments.model.js";
-import { NocCertifiedCopy } from "../../../../models/allFormModels/accountDep/NocCertifiedCopy.model.js";
-import { NocCertifiedCopyDocuments } from "../../../../models/allFormModels/accountDep/nocCertifiedCopyDocumentes.model.js";
+
+import { SRA_Circular3_ProposalDocs3 } from "../../../../models/allFormModels/townPlanningDepModel/3sra_Circular3_ProposalDocs.model.js";
+import { Sra_Circular3_ProposalDocsDocument } from "../../../../models/allFormModels/townPlanningDepModel/3sra_Circular3_ProposalDocsDocuments.model.js";
 import { DepartmentManager } from "../../../../models/departmentManager/departmentManager.model.js";
 import { ApiError } from "../../../../utils/ApiError.js";
 import { ApiResponse } from "../../../../utils/ApiResponse.js";
@@ -10,7 +9,7 @@ import { asyncHandler } from "../../../../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../../../../utils/cloudinary.js";
 import { generateApplicationId } from "../../../../utils/generateApplicationId.js";
 import { getDate } from "../../../../utils/handleDate.js";
-const create2CertifiedRentDepositCopies = asyncHandler(async (req, res) => {
+const create3SRA_Circular3_ProposalDocs3 = asyncHandler(async (req, res) => {
   try {
     const {
       name,
@@ -122,8 +121,8 @@ const create2CertifiedRentDepositCopies = asyncHandler(async (req, res) => {
     const expectingDate = getDate(15);
     // console.log("applicationId", applicationId);
 
-    const certifiedRentDepositCopies2Created =
-      await CertifiedRentDepositCopies2.create({
+    const sra_Circular3_ProposalDocs3Created =
+      await SRA_Circular3_ProposalDocs3.create({
         name,
         applyDate,
         phone,
@@ -150,10 +149,10 @@ const create2CertifiedRentDepositCopies = asyncHandler(async (req, res) => {
         departmentManager: departmentManager?.fullName, //need to check this field
       });
 
-    if (!certifiedRentDepositCopies2Created) {
+    if (!sra_Circular3_ProposalDocs3Created) {
       throw new ApiError(
         500,
-        "Something went wrong while creating the CertifiedRentDepositCopies2"
+        "Something went wrong while creating the sra_Circular3_ProposalDocs3"
       );
     }
     return res
@@ -161,20 +160,20 @@ const create2CertifiedRentDepositCopies = asyncHandler(async (req, res) => {
       .json(
         new ApiResponse(
           200,
-          certifiedRentDepositCopies2Created,
-          "Certified Rent Deposit Copies2 created successfully"
+          sra_Circular3_ProposalDocs3Created,
+          "sra_Circular3_ProposalDocs3 created successfully"
         )
       );
   } catch (error) {
-    console.log("Error while registering CertifiedRentDepositCopies2", error);
+    console.log("Error while registering sra_Circular3_ProposalDocs3", error);
     throw new ApiError(
       401,
-      error || "Error while registering Certified Rent Deposit Copies2"
+      error || "Error while registering sra_Circular3_ProposalDocs3"
     );
   }
 });
 
-const create2CertifiedRentDepositCopiesDocuments = asyncHandler(
+const create3Sra_Circular3_ProposalDocs3Documents = asyncHandler(
   async (req, res) => {
     try {
       console.log("req.files", req.files);
@@ -217,8 +216,8 @@ const create2CertifiedRentDepositCopiesDocuments = asyncHandler(
       );
       console.log("aadharCard.url", aadharCard.url);
 
-      const certifiedRentDepositCopiesDocumentCreated =
-        await CertifiedRentDepositCopiesDocuments.create({
+      const sra_Circular3_ProposalDocsDocumentCreated =
+        await Sra_Circular3_ProposalDocsDocument.create({
           aadharCard: aadharCard.url,
           panCard: panCard.url,
           signature: signature.url,
@@ -226,16 +225,16 @@ const create2CertifiedRentDepositCopiesDocuments = asyncHandler(
           submit: true,
         });
 
-      if (!certifiedRentDepositCopiesDocumentCreated) {
+      if (!sra_Circular3_ProposalDocsDocumentCreated) {
         throw new ApiError(
           500,
           "Something went wrong while creating the certifiedRentDepositCopiesDocument"
         );
       }
-      const updateNoc = await CertifiedRentDepositCopies2.findByIdAndUpdate(
+      const updateNoc = await SRA_Circular3_ProposalDocs3.findByIdAndUpdate(
         _id,
         {
-          documents: certifiedRentDepositCopiesDocumentCreated._id,
+          documents: sra_Circular3_ProposalDocsDocumentCreated._id,
         }
       );
 
@@ -244,25 +243,29 @@ const create2CertifiedRentDepositCopiesDocuments = asyncHandler(
         .json(
           new ApiResponse(
             200,
-            certifiedRentDepositCopiesDocumentCreated,
-            "RentDeposit Copy document created successfully"
+            sra_Circular3_ProposalDocsDocumentCreated,
+            "sra_Circular3_ProposalDocsDocumentCreated Copy document created successfully"
           )
         );
     } catch (error) {
-      console.log("Error while registering RentDeposit Copy document", error);
+      console.log(
+        "Error while registering sra_Circular3_ProposalDocsDocument Copy document",
+        error
+      );
       throw new ApiError(
         401,
-        error || "Error while registering RentDeposit Copy document"
+        error ||
+          "Error while registering sra_Circular3_ProposalDocsDocumentCreated Copy document"
       );
     }
   }
 );
 
-const get2CertifiedRentDepositCopies = asyncHandler(async (req, res) => {
+const get3Sra_Circular3_ProposalDocs3 = asyncHandler(async (req, res) => {
   try {
     const userId = req.user._id;
     // console.log("userId", userId);
-    const response = await CertifiedRentDepositCopies2.find({ userId: userId });
+    const response = await SRA_Circular3_ProposalDocs3.find({ userId: userId });
     // console.log("res ", res);
     return res
       .status(201)
@@ -270,20 +273,20 @@ const get2CertifiedRentDepositCopies = asyncHandler(async (req, res) => {
         new ApiResponse(
           200,
           response,
-          "Fetched all certified rent deposit copy request"
+          "Fetched all SRA_Circular3_Proposal copy request"
         )
       );
   } catch (error) {
-    console.log("Error while getting certified rent deposit ", error);
+    console.log("Error while getting SRA_Circular3_Proposal ", error);
     throw new ApiError(
       401,
-      error || "Error while getting certified rent deposit copy"
+      error || "Error while getting SRA_Circular3_Proposal copy"
     );
   }
 });
 
 export {
-  create2CertifiedRentDepositCopies,
-  create2CertifiedRentDepositCopiesDocuments,
-  get2CertifiedRentDepositCopies,
+  create3SRA_Circular3_ProposalDocs3,
+  create3Sra_Circular3_ProposalDocs3Documents,
+  get3Sra_Circular3_ProposalDocs3,
 };

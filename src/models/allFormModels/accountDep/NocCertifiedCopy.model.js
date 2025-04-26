@@ -44,6 +44,10 @@ const nocCertifiedCopySchema = new Schema(
       type: Boolean,
       default: false,
     },
+    schemeDeveloper: {
+      type: String,
+      required: true,
+    },
     remark: {
       type: Schema.Types.ObjectId,
       ref: "NocRemark",
@@ -73,10 +77,19 @@ const nocCertifiedCopySchema = new Schema(
       type: String,
       required: true,
     },
+    // area code
     landNumber: {
       type: String,
-      required: true,
+      //   required: true,
     },
+    surveyNo: {
+      type: String,
+    },
+    finalPlot: {
+      type: String,
+    },
+
+    //
 
     address: {
       type: String,
@@ -90,9 +103,13 @@ const nocCertifiedCopySchema = new Schema(
       type: String,
       required: true,
     },
+    //
     sectorNo: {
       type: String,
-      required: true,
+      //   required: true,
+    },
+    wardNo: {
+      type: String,
     },
     governmentServiceBranch: {
       // need to add in controller

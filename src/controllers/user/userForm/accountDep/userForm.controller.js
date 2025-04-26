@@ -15,7 +15,7 @@ const createNocCertifiedCopy = asyncHandler(async (req, res) => {
       applyDate,
       phone,
       city,
-
+      schemeDeveloper,
       address,
       taluka,
       village,
@@ -44,7 +44,7 @@ const createNocCertifiedCopy = asyncHandler(async (req, res) => {
         applyDate,
         phone,
         city,
-
+        schemeDeveloper,
         address,
         taluka,
         village,
@@ -57,10 +57,18 @@ const createNocCertifiedCopy = asyncHandler(async (req, res) => {
     }
 
     if (!sectorNo && !wardNo) {
+      console.log(" sectorNo wardNo,", sectorNo, wardNo);
       throw new ApiError(400, "sectorNo or wardNo fields are required");
     }
 
     if (!landNumber && !surveyNo && !finalPlot) {
+      console.log(
+        "  landNumber,      surveyNo,finalPlot,",
+        landNumber,
+        surveyNo,
+        finalPlot
+      );
+
       throw new ApiError(
         400,
         "landNumber or surveyNo or finalPlot fields are required"
@@ -108,7 +116,7 @@ const createNocCertifiedCopy = asyncHandler(async (req, res) => {
       applyDate,
       phone,
       city,
-
+      schemeDeveloper,
       address,
       taluka,
       village,

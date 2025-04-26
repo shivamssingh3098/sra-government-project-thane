@@ -56,4 +56,25 @@ router
   .route("/certified-ren-deposit-copies")
   .get(verifyJWT, get2CertifiedRentDepositCopies);
 
+//service 3
+
+router
+  .route("/create-sra-circular3-proposal-docs")
+  .post(verifyJWT, create2CertifiedRentDepositCopies);
+
+router.route("/create-sra-circular3-proposal-docs-documents").post(
+  verifyJWT,
+  upload.fields([
+    { name: "aadharCard", maxCount: 1 },
+    { name: "panCard", maxCount: 1 },
+    { name: "signature", maxCount: 1 },
+    { name: "otherDocument", maxCount: 1 },
+  ]),
+  create2CertifiedRentDepositCopiesDocuments
+);
+
+router
+  .route("/sra-circular3-proposal-docs")
+  .get(verifyJWT, get2CertifiedRentDepositCopies);
+
 export default router;
