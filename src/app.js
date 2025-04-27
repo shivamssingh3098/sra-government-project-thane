@@ -8,6 +8,7 @@ import { globalErrorHandler } from "./middlewares/error.middleware.js";
 // user routes import
 import userRoutes from "./routes/user/user.routes.js";
 import formRoutes from "./routes/user/userForms.routes.js";
+import commonFormRoutes from "./routes/user/commonForm.routes.js";
 
 // department routes import
 import departmentManagerRoutes from "./routes/departmentManager/departmentManager.routes.js";
@@ -38,6 +39,7 @@ app.use(cookieParser());
 //user routes
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/users", formRoutes);
+app.use("/api/v1/users", commonFormRoutes);
 
 // department manager routes
 
