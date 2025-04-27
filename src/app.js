@@ -11,8 +11,12 @@ import formRoutes from "./routes/user/userForms.routes.js";
 
 // department routes import
 import departmentManagerRoutes from "./routes/departmentManager/departmentManager.routes.js";
-import departmentManagerFormRoutes from "./routes/departmentManager/accountDep/departmentFormManager.routes.js";
+import department1ManagerFormRoutes from "./routes/departmentManager/accountDep/departmentFormManager.routes.js";
+import department2ManagerFormRoutes from "./routes/departmentManager/townPlanningRoutes/department2FormManager.routes.js";
+
 import remarkRoutes from "./routes/departmentManager/accountDep/remark.routes.js";
+
+import remark2Routes from "./routes/departmentManager/townPlanningRoutes/remarkDep2.routes.js";
 
 // admin routes import
 import adminRoutes from "./routes/admin/admin.routes.js";
@@ -38,8 +42,10 @@ app.use("/api/v1/users", formRoutes);
 // department manager routes
 
 app.use("/api/v1/department-managers", departmentManagerRoutes);
-app.use("/api/v1/department-managers", departmentManagerFormRoutes);
+app.use("/api/v1/department-managers", department1ManagerFormRoutes);
+app.use("/api/v1/department-managers", department2ManagerFormRoutes);
 app.use("/api/v1/department-managers", remarkRoutes);
+app.use("/api/v1/department-managers", remark2Routes);
 
 //user routes
 app.use("/api/v1/admin", adminRoutes);

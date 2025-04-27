@@ -56,7 +56,7 @@ const sra_Circular3_ProposalDocsSchema = new Schema(
 
     documents: {
       type: Schema.Types.ObjectId,
-      ref: "CertifiedRentDepositCopiesDocuments",
+      ref: "Sra_Circular3_ProposalDocsDocument",
       // required: true,
     },
 

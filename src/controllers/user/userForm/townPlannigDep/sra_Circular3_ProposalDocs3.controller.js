@@ -47,10 +47,23 @@ const create3SRA_Circular3_ProposalDocs3 = asyncHandler(async (req, res) => {
       taluka,
       village,
       department,
-      governmentServiceBranch,
-      schemeDeveloper
+      governmentServiceBranch
     );
+
     console.log("req.body", req.body);
+    console.log(
+      "req.body  name, applyDate,phone,city,address,taluka,      village,schemeDeveloper,department,governmentServiceBranch",
+      name,
+      applyDate,
+      phone,
+      city,
+      address,
+      taluka,
+      village,
+
+      department,
+      governmentServiceBranch
+    );
 
     if (
       [
@@ -58,11 +71,10 @@ const create3SRA_Circular3_ProposalDocs3 = asyncHandler(async (req, res) => {
         applyDate,
         phone,
         city,
-
         address,
         taluka,
         village,
-        schemeDeveloper,
+
         department,
         governmentServiceBranch,
       ].some((field) => field?.trim() === "")
@@ -127,7 +139,7 @@ const create3SRA_Circular3_ProposalDocs3 = asyncHandler(async (req, res) => {
         applyDate,
         phone,
         city,
-        schemeDeveloper,
+
         address,
         taluka,
         village,
@@ -261,6 +273,34 @@ const create3Sra_Circular3_ProposalDocs3Documents = asyncHandler(
   }
 );
 
+const getSpecificSra_Circular3_ProposalDocs = asyncHandler(async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const formId = req.query.formId;
+    // console.log("userId", userId);
+    const response = await SRA_Circular3_ProposalDocs3.find({
+      userId: userId,
+      _id: formId,
+    }).populate("documents");
+    // console.log("res ", res);
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          response,
+          "Fetched  certified rent deposit copy request"
+        )
+      );
+  } catch (error) {
+    console.log("Error while getting certified rent deposit ", error);
+    throw new ApiError(
+      400,
+      error || "Error while getting certified rent deposit copy"
+    );
+  }
+});
+
 const get3Sra_Circular3_ProposalDocs3 = asyncHandler(async (req, res) => {
   try {
     const userId = req.user._id;
@@ -289,4 +329,5 @@ export {
   create3SRA_Circular3_ProposalDocs3,
   create3Sra_Circular3_ProposalDocs3Documents,
   get3Sra_Circular3_ProposalDocs3,
+  getSpecificSra_Circular3_ProposalDocs,
 };

@@ -15,6 +15,13 @@ import {
   get2CertifiedRentDepositCopies,
   getSpecificFormData2CertifiedRentDepositCopies,
 } from "../../controllers/user/userForm/accountDep/2certifiedRentDepositCopies.controller.js";
+//service 3
+import {
+  create3SRA_Circular3_ProposalDocs3,
+  create3Sra_Circular3_ProposalDocs3Documents,
+  get3Sra_Circular3_ProposalDocs3,
+  getSpecificSra_Circular3_ProposalDocs,
+} from "../../controllers/user/userForm/townPlannigDep/sra_Circular3_ProposalDocs3.controller.js";
 
 const router = Router();
 
@@ -68,7 +75,7 @@ router
 
 router
   .route("/create-sra-circular3-proposal-docs")
-  .post(verifyJWT, create2CertifiedRentDepositCopies);
+  .post(verifyJWT, create3SRA_Circular3_ProposalDocs3);
 
 router.route("/create-sra-circular3-proposal-docs-documents").post(
   verifyJWT,
@@ -78,11 +85,15 @@ router.route("/create-sra-circular3-proposal-docs-documents").post(
     { name: "signature", maxCount: 1 },
     { name: "otherDocument", maxCount: 1 },
   ]),
-  create2CertifiedRentDepositCopiesDocuments
+  create3Sra_Circular3_ProposalDocs3Documents
 );
 
 router
+  .route("/sra-circular3-proposal-docs-get-specific")
+  .get(verifyJWT, getSpecificSra_Circular3_ProposalDocs);
+
+router
   .route("/sra-circular3-proposal-docs")
-  .get(verifyJWT, get2CertifiedRentDepositCopies);
+  .get(verifyJWT, get3Sra_Circular3_ProposalDocs3);
 
 export default router;

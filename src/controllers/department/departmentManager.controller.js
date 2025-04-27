@@ -134,7 +134,7 @@ const registerDepartmentManager = asyncHandler(async (req, res) => {
   } catch (error) {
     console.log("Error while registering department Manager", error);
     throw new ApiError(
-      401,
+      400,
       error || "Error while registering department Manager"
     );
   }

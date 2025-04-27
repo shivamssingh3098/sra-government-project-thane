@@ -17,13 +17,11 @@ router
   .route("/all-pending-request-for-noc-certified-copy")
   .get(verifyJWTDepartmentManager, getAllPendingRequestForNocCertifiedCopy);
 
-router
-  .route("/update-serviceStatus-for-noc-certified-copy")
-  .patch(
-    verifyJWTDepartmentManager,
-    upload.single("attachedDocument"),
-    ForNocCertifiedCopyStatus
-  );
+router.route("/update-serviceStatus-for-noc-certified-copy").patch(
+  verifyJWTDepartmentManager,
+  // upload.single("attachedDocument"),
+  ForNocCertifiedCopyStatus
+);
 
 // certified rent deposit copies
 

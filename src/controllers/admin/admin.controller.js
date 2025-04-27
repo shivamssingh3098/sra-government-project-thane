@@ -118,7 +118,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
       .json(new ApiResponse(200, createdAdmin, "Admin created successfully"));
   } catch (error) {
     console.log("Error while registering admin", error);
-    throw new ApiError(401, error || "Error while registering admin");
+    throw new ApiError(400, error || "Error while registering admin");
   }
 });
 
