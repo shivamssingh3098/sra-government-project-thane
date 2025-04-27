@@ -142,7 +142,7 @@ const create2CertifiedRentDepositCopies = asyncHandler(async (req, res) => {
         finalPlot,
         sectorNo,
         wardNo,
-        submit: true,
+        IsSubmit: true,
         userId: req.user._id,
         applicationId: applicationId,
         maximumDays: 15,
@@ -223,7 +223,7 @@ const create2CertifiedRentDepositCopiesDocuments = asyncHandler(
           panCard: panCard.url,
           signature: signature.url,
           otherDocument: otherDocument.url,
-          submit: true,
+          IsSubmit: true,
         });
 
       if (!certifiedRentDepositCopiesDocumentCreated) {
@@ -257,7 +257,35 @@ const create2CertifiedRentDepositCopiesDocuments = asyncHandler(
     }
   }
 );
-
+const getSpecificFormData2CertifiedRentDepositCopies = asyncHandler(
+  async (req, res) => {
+    try {
+      const userId = req.user._id;
+      const formId = req.query.formId;
+      // console.log("userId", userId);
+      const response = await CertifiedRentDepositCopies2.find({
+        userId: userId,
+        _id: formId,
+      }).populate("documents");
+      // console.log("res ", res);
+      return res
+        .status(200)
+        .json(
+          new ApiResponse(
+            200,
+            response,
+            "Fetched  certified rent deposit copy request"
+          )
+        );
+    } catch (error) {
+      console.log("Error while getting certified rent deposit ", error);
+      throw new ApiError(
+        400,
+        error || "Error while getting certified rent deposit copy"
+      );
+    }
+  }
+);
 const get2CertifiedRentDepositCopies = asyncHandler(async (req, res) => {
   try {
     const userId = req.user._id;
@@ -286,4 +314,5 @@ export {
   create2CertifiedRentDepositCopies,
   create2CertifiedRentDepositCopiesDocuments,
   get2CertifiedRentDepositCopies,
+  getSpecificFormData2CertifiedRentDepositCopies,
 };

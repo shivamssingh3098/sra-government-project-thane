@@ -130,7 +130,7 @@ const createNocCertifiedCopy = asyncHandler(async (req, res) => {
       finalPlot,
       sectorNo,
       wardNo,
-      submit: true,
+      IsSubmit: true,
       userId: req.user._id,
       applicationId: applicationId,
       maximumDays: 15,
@@ -205,7 +205,7 @@ const createNocCertifiedCopyDocuments = asyncHandler(async (req, res) => {
         panCard: panCard.url,
         signature: signature.url,
         otherDocument: otherDocument.url,
-        submit: true,
+        IsSubmit: true,
       });
 
     if (!nocCertifiedCopyDocumentCreated) {
@@ -235,7 +235,29 @@ const createNocCertifiedCopyDocuments = asyncHandler(async (req, res) => {
     );
   }
 });
-
+const getSpecificNocCertifiedCopy = asyncHandler(async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const formId = req.query.formId;
+    // console.log("userId", userId);
+    const response = await NocCertifiedCopy.find({
+      userId: userId,
+      _id: formId,
+    }).populate("documents");
+    // console.log("res ", res);
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(200, response, "Fetched   NOC certified copy request")
+      );
+  } catch (error) {
+    console.log("Error while getting certified rent deposit ", error);
+    throw new ApiError(
+      400,
+      error || "Error while getting certified rent deposit copy"
+    );
+  }
+});
 const getNocCertifiedCopy = asyncHandler(async (req, res) => {
   try {
     const userId = req.user._id;
@@ -243,7 +265,7 @@ const getNocCertifiedCopy = asyncHandler(async (req, res) => {
     const response = await NocCertifiedCopy.find({ userId: userId });
     // console.log("res ", res);
     return res
-      .status(201)
+      .status(200)
       .json(
         new ApiResponse(200, response, "Fetched all NOC certified request")
       );
@@ -257,4 +279,5 @@ export {
   createNocCertifiedCopy,
   createNocCertifiedCopyDocuments,
   getNocCertifiedCopy,
+  getSpecificNocCertifiedCopy,
 };

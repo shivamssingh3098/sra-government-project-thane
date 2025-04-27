@@ -6,12 +6,14 @@ import {
   createNocCertifiedCopy,
   createNocCertifiedCopyDocuments,
   getNocCertifiedCopy,
+  getSpecificNocCertifiedCopy,
 } from "../../controllers/user/userForm/accountDep/userForm.controller.js";
 //service 2  certified rent deposit copies
 import {
   create2CertifiedRentDepositCopies,
   create2CertifiedRentDepositCopiesDocuments,
   get2CertifiedRentDepositCopies,
+  getSpecificFormData2CertifiedRentDepositCopies,
 } from "../../controllers/user/userForm/accountDep/2certifiedRentDepositCopies.controller.js";
 
 const router = Router();
@@ -30,7 +32,9 @@ router.route("/noc-Certified-Copy-documents").post(
   ]),
   createNocCertifiedCopyDocuments
 );
-
+router
+  .route("/get-noc-Certified-Copy-get-specific")
+  .get(verifyJWT, getSpecificNocCertifiedCopy);
 router.route("/get-noc-Certified-Copy").get(verifyJWT, getNocCertifiedCopy);
 
 // router.route("/current-user").get(verifyJWT, currentUser);
@@ -51,6 +55,10 @@ router.route("/create-certified-ren-deposit-copies-documents").post(
   ]),
   create2CertifiedRentDepositCopiesDocuments
 );
+
+router
+  .route("/certified-ren-deposit-copies-get-specific")
+  .get(verifyJWT, getSpecificFormData2CertifiedRentDepositCopies);
 
 router
   .route("/certified-ren-deposit-copies")

@@ -141,7 +141,7 @@ const create3SRA_Circular3_ProposalDocs3 = asyncHandler(async (req, res) => {
         finalPlot,
         sectorNo,
         wardNo,
-        submit: true,
+        IsSubmit: true,
         userId: req.user._id,
         applicationId: applicationId,
         maximumDays: 15,
@@ -222,7 +222,7 @@ const create3Sra_Circular3_ProposalDocs3Documents = asyncHandler(
           panCard: panCard.url,
           signature: signature.url,
           otherDocument: otherDocument.url,
-          submit: true,
+          IsSubmit: true,
         });
 
       if (!sra_Circular3_ProposalDocsDocumentCreated) {
