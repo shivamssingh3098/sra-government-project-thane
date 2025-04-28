@@ -4,13 +4,18 @@ import { upload } from "../../middlewares/multer.middleware.js";
 import { verifyJWT } from "../../middlewares/auth.middleware.js";
 import {
   createCommonForm,
+  createCommonFormsTest,
   getSpecificFormData,
 } from "../../controllers/user/userForm/commonFormController/commonForm.controller.js";
-import { createCommonDocuments } from "../../controllers/user/userForm/commonFormController/commonFormDocument.controller.js";
+import {
+  createCommonDocuments,
+  createCommonFormDocument,
+} from "../../controllers/user/userForm/commonFormController/commonFormDocument.controller.js";
 
 const router = Router();
 
-router.route("/create-common-form").post(verifyJWT, createCommonForm);
+router.route("/create-common-form").post(verifyJWT, createCommonFormsTest);
+// router.route("/create-common-form-test").post(verifyJWT, createCommonFormsTest);
 
 router.route("/documents-upload").post(
   verifyJWT,
@@ -59,7 +64,8 @@ router.route("/documents-upload").post(
     { name: "affidavit", maxCount: 1 },
     { name: "certifiedNOCFromCooperativeHousingSociety", maxCount: 1 },
   ]),
-  createCommonDocuments
+  createCommonFormDocument
+  // createCommonDocuments
 );
 
 router.route("/get-specific-form-data").get(verifyJWT, getSpecificFormData);
