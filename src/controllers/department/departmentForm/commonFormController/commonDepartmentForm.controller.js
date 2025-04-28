@@ -32,3 +32,20 @@ export const getAllCommonPendingService = asyncHandler(async (req, res) => {
     );
   }
 });
+
+export const getSpecificFormData = asyncHandler(async (req, res) => {
+  try {
+    const formId = req.query.formId;
+    console.log("formId", formId);
+    const response = await CommonServices.find({
+      _id: formId,
+    }).populate("documents");
+    // console.log("res ", res);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, response, "form fetched "));
+  } catch (error) {
+    console.log("Error while getting form fetched  ", error);
+    throw new ApiError(400, error || "Error while getting form fetched ");
+  }
+});

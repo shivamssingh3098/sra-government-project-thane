@@ -61,7 +61,7 @@ const commonFormSchema = new Schema(
 
     documents: {
       type: Schema.Types.ObjectId,
-      ref: "CertifiedRentDepositCopiesDocuments", // need to change form common
+      ref: "CommonFormDocument", // need to change form common
       // required: true,
     },
 

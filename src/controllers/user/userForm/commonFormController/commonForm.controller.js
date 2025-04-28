@@ -1181,3 +1181,22 @@ export const createCommonForm = asyncHandler(async (req, res) => {
     throw new ApiError(401, error || "Error while creating form");
   }
 });
+
+export const getSpecificFormData = asyncHandler(async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const formId = req.query.formId;
+    // console.log("userId", userId);
+    const response = await CommonServices.find({
+      userId: userId,
+      _id: formId,
+    }).populate("documents");
+    // console.log("res ", res);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, response, "form fetched "));
+  } catch (error) {
+    console.log("Error while getting form fetched  ", error);
+    throw new ApiError(400, error || "Error while getting form fetched ");
+  }
+});
