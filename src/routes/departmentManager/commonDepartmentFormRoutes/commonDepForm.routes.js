@@ -4,6 +4,7 @@ import { verifyJWTDepartmentManager } from "../../../middlewares/departmentManag
 
 import {
   getAllCommonPendingService,
+  getServiceStatusCountsByDepartment,
   getSpecificFormData,
 } from "../../../controllers/department/departmentForm/commonFormController/commonDepartmentForm.controller.js";
 const router = Router();
@@ -18,9 +19,8 @@ router
   .route("/get-specific-form-data")
   .get(verifyJWTDepartmentManager, getSpecificFormData);
 
-// router.route("/accept-serviceStatus-for-sra_circular3_proposal-docs3").patch(
-//   verifyJWTDepartmentManager,
+router
+  .route("/request-count")
+  .get(verifyJWTDepartmentManager, getServiceStatusCountsByDepartment);
 
-//   sra_Circular3_ProposalDocs3Status
-// );
 export default router;

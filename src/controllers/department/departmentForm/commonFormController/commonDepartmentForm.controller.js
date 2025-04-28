@@ -23,7 +23,7 @@ export const getAllCommonPendingService = asyncHandler(async (req, res) => {
 
     res
       .status(200)
-      .json(new ApiResponse(200, { data: getRequest }, "Pending Requests"));
+      .json(new ApiResponse(200, { data: getRequest }, "All Requests"));
   } catch (error) {
     console.log("Error while getting all  pending request", error);
     throw new ApiError(
@@ -49,3 +49,54 @@ export const getSpecificFormData = asyncHandler(async (req, res) => {
     throw new ApiError(400, error || "Error while getting form fetched ");
   }
 });
+
+export const getServiceStatusCountsByDepartment = async (req, res) => {
+  try {
+    const userDepartment = req.departmentManager?.department;
+
+    if (!userDepartment) {
+      throw new ApiError(400, "Department information is missing in request");
+    }
+
+    // Filter documents by department and group by serviceStatus
+    const statusCounts = await CommonServices.aggregate([
+      {
+        $match: {
+          department: userDepartment,
+        },
+      },
+      {
+        $group: {
+          _id: "$serviceStatus",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    // Prepare response with default 0 values
+    const response = {
+      PENDING: 0,
+      ACCEPTED: 0,
+      FULFILLED: 0,
+      REJECTED: 0,
+    };
+
+    // Update response based on aggregation
+    statusCounts.forEach((item) => {
+      response[item._id] = item.count;
+    });
+
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          response,
+          "Service status counts fetched successfully"
+        )
+      );
+  } catch (error) {
+    console.error(error);
+    throw new ApiError(500, "Failed to fetch service status counts");
+  }
+};
