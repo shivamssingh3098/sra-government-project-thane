@@ -65,17 +65,11 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         phone,
 
         address,
-        taluka,
-        village,
 
         department,
         governmentServiceBranch,
-
-        municipalCorporation,
-        cityCouncil,
-        villageCouncil,
       ]);
-      console.log("Service 1 selected");
+      console.log("Service 1 selected, schemeDeveloper", schemeDeveloper);
 
       if (serviceNumber >= 1 && serviceNumber <= 2)
         if (!schemeDeveloper) {

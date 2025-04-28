@@ -1,3 +1,4 @@
+import { SERVICES_STATUS } from "../../../../constants.js";
 import { CommonServices } from "../../../../models/allFormModels/commonModels/commonForm.model.js";
 
 import { ApiError } from "../../../../utils/ApiError.js";
@@ -54,6 +55,47 @@ export const getSpecificFormData = asyncHandler(async (req, res) => {
   } catch (error) {
     console.log("Error while getting form fetched  ", error);
     throw new ApiError(400, error || "Error while getting form fetched ");
+  }
+});
+
+export const updateCommonFormStatus = asyncHandler(async (req, res) => {
+  try {
+    const { serviceStatus, _id } = req.body;
+    console.log("serviceStatus, id", serviceStatus, _id);
+
+    if (!serviceStatus || !_id) {
+      throw new ApiError(400, "All fields are required");
+    }
+
+    if (!SERVICES_STATUS.includes(serviceStatus)) {
+      throw new ApiError(
+        401,
+
+        `Invalid serviceStatus. Allowed values: ${SERVICES_STATUS.join(", ")}`
+      );
+    }
+
+    const updatedData = await CommonServices.findByIdAndUpdate(
+      _id,
+      {
+        $set: {
+          serviceStatus: serviceStatus,
+        },
+      },
+      { new: true }
+    );
+    res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          { data: updatedData },
+          "Status updated successfully"
+        )
+      );
+  } catch (error) {
+    console.log("Error while accept requests", error);
+    throw new ApiError(401, error.message || "Error while accept request");
   }
 });
 
