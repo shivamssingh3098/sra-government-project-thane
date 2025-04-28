@@ -3,12 +3,13 @@ import { Router } from "express";
 import { upload } from "../../middlewares/multer.middleware.js";
 import { verifyJWT } from "../../middlewares/auth.middleware.js";
 import {
-  createCommonForm,
+  // createCommonForm,
   createCommonFormsTest,
   getSpecificFormData,
+  getServiceRequest,
 } from "../../controllers/user/userForm/commonFormController/commonForm.controller.js";
 import {
-  createCommonDocuments,
+  // createCommonDocuments,
   createCommonFormDocument,
 } from "../../controllers/user/userForm/commonFormController/commonFormDocument.controller.js";
 
@@ -65,13 +66,10 @@ router.route("/documents-upload").post(
     { name: "certifiedNOCFromCooperativeHousingSociety", maxCount: 1 },
   ]),
   createCommonFormDocument
-  // createCommonDocuments
 );
 
 router.route("/get-specific-form-data").get(verifyJWT, getSpecificFormData);
 
-// router
-//   .route("/get-noc-Certified-Copy-get-specific")
-//   .get(verifyJWT, getSpecificNocCertifiedCopy);
+router.route("/get-service-request").get(verifyJWT, getServiceRequest);
 // router.route("/get-noc-Certified-Copy").get(verifyJWT, getNocCertifiedCopy);
 export default router;
