@@ -14,7 +14,7 @@ import commonFormRoutes from "./routes/user/commonForm.routes.js";
 import departmentManagerRoutes from "./routes/departmentManager/departmentManager.routes.js";
 import department1ManagerFormRoutes from "./routes/departmentManager/accountDep/departmentFormManager.routes.js";
 import department2ManagerFormRoutes from "./routes/departmentManager/townPlanningRoutes/department2FormManager.routes.js";
-
+import commonFormDep from "./routes/departmentManager/commonDepartmentFormRoutes/commonDepForm.routes.js";
 import remarkRoutes from "./routes/departmentManager/accountDep/remark.routes.js";
 
 import remark2Routes from "./routes/departmentManager/townPlanningRoutes/remarkDep2.routes.js";
@@ -46,6 +46,8 @@ app.use("/api/v1/users", commonFormRoutes);
 app.use("/api/v1/department-managers", departmentManagerRoutes);
 app.use("/api/v1/department-managers", department1ManagerFormRoutes);
 app.use("/api/v1/department-managers", department2ManagerFormRoutes);
+app.use("/api/v1/department-managers", commonFormDep);
+
 app.use("/api/v1/department-managers", remarkRoutes);
 app.use("/api/v1/department-managers", remark2Routes);
 

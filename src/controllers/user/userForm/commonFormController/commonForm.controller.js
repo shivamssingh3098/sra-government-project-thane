@@ -10,7 +10,7 @@ import { form1Validation } from "../../../../utils/validateRequiredFields.js";
 
 export const createCommonForm = asyncHandler(async (req, res) => {
   try {
-    const serviceNumber = req.body.serviceNumber;
+    const serviceNumber = Number(req.body.serviceNumber);
 
     switch (serviceNumber) {
       case 1:
@@ -1174,7 +1174,7 @@ export const createCommonForm = asyncHandler(async (req, res) => {
         console.log("Service 22 selected");
         break;
       default:
-        console.log("Invalid service number");
+        console.log("Invalid service number", serviceNumber);
     }
   } catch (error) {
     console.log("Error while creating form", error);

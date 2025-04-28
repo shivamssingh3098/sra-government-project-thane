@@ -17,8 +17,11 @@ const commonFormDocumentSchema = new Schema(
       type: String,
       //   required: true,
     },
-    otherDocument: {
-      //   type: String,
+    otherDocument1: {
+      type: String,
+    },
+    otherDocument2: {
+      type: String,
     },
     IsSubmit: {
       type: Boolean,
@@ -30,15 +33,16 @@ const commonFormDocumentSchema = new Schema(
 
     identityCard: { type: String },
     signature: { type: String },
-    otherDocuments: [{ type: String }],
+
     bankPassbookFirstCopy: { type: String },
     prescribedApplication: { type: String },
+
     originalEligibleMemberApplication: { type: String },
     originalEligibleMemberPanCard: { type: String },
     originalEligibleMemberAadhaarCard: { type: String },
     possessionReceiptOriginalEligibleMember: { type: String },
     shareholderCertificateOriginalEligibleMember: { type: String },
-    eligibilityListOriginalEligibleMembers: [{ type: String }],
+    eligibilityListOriginalEligibleMembers: { type: String },
     oathAffidavitOriginalEligibleMember: { type: String },
     institutionNOCOriginalEligibleMember: { type: String },
     buyerAadhaarPanCard: { type: String },
@@ -47,11 +51,11 @@ const commonFormDocumentSchema = new Schema(
     buyerRegisteredDocument: { type: String },
     buyerAffidavit: { type: String },
     bankStatement: { type: String },
-    documentsForSigningBankApplication: [{ type: String }],
-    annexureA_C: [{ type: String }],
+    documentsForSigningBankApplication: { type: String },
+    annexureA_C: { type: String },
     scheme: { type: String },
     preRegistrationMeetingDraftInstitution: { type: String },
-    annexure3_4: [{ type: String }],
+    annexure3_4: { type: String },
     formASelfDeclaration: { type: String },
     voterIDCardElectorList: { type: String },
     electricityBill: { type: String },
@@ -62,7 +66,7 @@ const commonFormDocumentSchema = new Schema(
     specifiedApplicationFormat: { type: String },
     deathCertificateHusbandWifeSonDaughter: { type: String },
     ownVoterIDCard: { type: String },
-    voterIDFamilyMembers: [{ type: String }],
+    voterIDFamilyMembers: { type: String },
     rationCardNo: { type: String },
     certifiedTrueCopyAnnexure2: { type: String },
     affidavit: { type: String },
