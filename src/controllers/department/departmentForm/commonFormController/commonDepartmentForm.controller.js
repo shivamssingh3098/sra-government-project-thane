@@ -8,13 +8,20 @@ export const getAllCommonPendingService = asyncHandler(async (req, res) => {
   try {
     console.log(req.departmentManager.department);
 
-    const { page, limit, serviceStatus } = req.query;
+    const { page, limit, serviceStatus, serviceNumber } = req.query;
     const skip = page * limit - limit;
-    console.log("page, limit, serviceStatus", page, limit, serviceStatus);
+    console.log(
+      "page, limit, serviceStatus, serviceNumber",
+      page,
+      limit,
+      serviceStatus,
+      serviceNumber
+    );
 
     const getRequest = await CommonServices.find({
       serviceStatus: serviceStatus,
       department: req.departmentManager.department,
+      serviceNumber: serviceNumber,
     })
       .sort({ _id: -1 })
       .limit(limit)
