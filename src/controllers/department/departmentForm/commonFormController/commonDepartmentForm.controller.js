@@ -14,6 +14,7 @@ export const getAllCommonPendingService = asyncHandler(async (req, res) => {
 
     const getRequest = await CommonServices.find({
       serviceStatus: serviceStatus,
+      department: req.departmentManager.department,
     })
       .sort({ _id: -1 })
       .limit(limit)
