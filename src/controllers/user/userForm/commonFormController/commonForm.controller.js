@@ -63,7 +63,6 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         name,
         applyDate,
         phone,
-        city,
 
         address,
         taluka,
