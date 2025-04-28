@@ -343,7 +343,8 @@ export const createCommonFormDocument = async (req, res) => {
     console.log("req.files", req.files);
 
     const { uploadedFiles, documentCount } = await uploadFiles(req.files);
-    const { serviceNumber, _id } = req.body;
+    const { serviceNumber } = req.body;
+    const _id = req.query.formId;
 
     console.log("uploadedFiles", uploadedFiles);
 
