@@ -604,14 +604,20 @@ export const getSpecificFormData = asyncHandler(async (req, res) => {
 
 export const getServiceRequest = asyncHandler(async (req, res) => {
   try {
-    console.log("req.user", req.user);
-
-    const serviceStatus = req.query.serviceStatus;
+    // console.log("req.user", req.user);
+    const { page, limit, serviceStatus } = req.query;
+    const skip = page * limit - limit;
+    console.log("page, limit, serviceStatus", page, limit, serviceStatus);
 
     const response = await CommonServices.find({
       userId: req.user._id,
       serviceStatus: serviceStatus,
-    });
+    })
+      .populate("remark")
+      .populate("documents")
+      .sort({ _id: -1 })
+      .limit(limit)
+      .skip(skip);
 
     return res
       .status(200)
