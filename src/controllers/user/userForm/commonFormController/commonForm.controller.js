@@ -59,16 +59,18 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
 
         areaCode,
       } = req.body;
-      form1Validation([
-        name,
-        applyDate,
-        phone,
 
-        address,
+      //  i have removed validation
+      // form1Validation([
+      //   name,
+      //   applyDate,
+      //   phone,
 
-        department,
-        governmentServiceBranch,
-      ]);
+      //   address,
+
+      //   department,
+      //   governmentServiceBranch,
+      // ]);
       console.log("Service 1 selected, schemeDeveloper", schemeDeveloper);
 
       if (serviceNumber >= 1 && serviceNumber <= 2)
