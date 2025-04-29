@@ -109,6 +109,9 @@ const commonFormSchema = new Schema(
     wardNo: {
       type: String,
     },
+    wardType: {
+      type: String,
+    },
 
     governmentServiceBranch: {
       type: String,

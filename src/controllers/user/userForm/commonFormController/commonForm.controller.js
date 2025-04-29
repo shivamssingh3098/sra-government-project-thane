@@ -4,6 +4,7 @@ import { DepartmentManager } from "../../../../models/departmentManager/departme
 import { ApiError } from "../../../../utils/ApiError.js";
 import { ApiResponse } from "../../../../utils/ApiResponse.js";
 import { asyncHandler } from "../../../../utils/asyncHandler.js";
+import { convertDocumentListToCamelCase } from "../../../../utils/convertArrayToObject.js";
 import { generateApplicationId } from "../../../../utils/generateApplicationId.js";
 import { getDate } from "../../../../utils/handleDate.js";
 import { form1Validation } from "../../../../utils/validateRequiredFields.js";
@@ -580,14 +581,38 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
 
 export const getSpecificFormData = asyncHandler(async (req, res) => {
   try {
-    const userId = req.user._id;
-    const formId = req.query.formId;
-    // console.log("userId", userId);
-    const response = await CommonServices.find({
-      userId: userId,
-      _id: formId,
-    }).populate("documents");
-    // console.log("res ", res);
+    // const userId = req.user._id;
+    // const formId = req.query.formId;
+    // // console.log("userId", userId);
+    // const response = await CommonServices.findOne({
+    //   userId: userId,
+    //   _id: formId,
+    // }).populate("documents");
+    // // console.log("res ", res);
+    // console.log("response getSpecificFormData", response);
+    // // const obj = convertDocumentListToCamelCase(
+    // //   response?.documents?.documentList
+    // // );
+    // // console.log("array to obj", obj.documentList);
+    const response = await CommonServices.findById(req.query.formId)
+      .populate("documents")
+      .lean(); // Use lean to get plain JS object
+
+    if (!response) {
+      throw new ApiError(404, "Service not found");
+    }
+    console.log("response serviceData", response);
+
+    // If documents exist and have documentList, convert to camelCase object
+    if (response.documents?.documentList) {
+      const obj = convertDocumentListToCamelCase(
+        response?.documents?.documentList
+      );
+
+      // Replace documentList array with formatted object
+      response.documents.documentList = obj;
+    }
+
     return res
       .status(200)
       .json(new ApiResponse(200, response, "form fetched "));
