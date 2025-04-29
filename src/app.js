@@ -25,9 +25,22 @@ import adminRoutes from "./routes/admin/admin.routes.js";
 import adminFormRoutes from "./routes/admin/formRoutes/adminNocCertifiedCopy.routes.js";
 
 const app = express();
+
+// ✅ CORS Configuration
+const allowedOrigins = [
+  process.env.CORS_ORIGIN, // For local
+  "http://ec2-65-0-93-255.ap-south-1.compute.amazonaws.com", // For production development
+];
+
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
