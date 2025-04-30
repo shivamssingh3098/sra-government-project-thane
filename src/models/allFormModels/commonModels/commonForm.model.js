@@ -158,6 +158,9 @@ const commonFormSchema = new Schema(
     annexure2SrNoInRehabilitationScheme: {
       type: String,
     },
+    apartmentNo: {
+      type: String,
+    },
     //  end other fields
 
     //new

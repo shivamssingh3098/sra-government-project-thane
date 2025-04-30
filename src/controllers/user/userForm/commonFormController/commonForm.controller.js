@@ -22,7 +22,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         applyDate,
         phone,
         city,
-
+        apartmentNo,
         address,
         taluka,
         village,
@@ -147,6 +147,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         applyDate,
         phone,
         city,
+        apartmentNo,
         schemeDeveloper,
         address,
         taluka,
