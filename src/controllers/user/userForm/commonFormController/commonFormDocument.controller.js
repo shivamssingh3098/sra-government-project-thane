@@ -6,6 +6,7 @@ import { asyncHandler } from "../../../../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../../../../utils/cloudinary.js";
 import { uploadFiles } from "../../../../utils/fileValidation.js";
 import { CommonFormDocument1 } from "../../../../models/allFormModels/commonModels/commonFormDocument1.model.js"; // adjust path
+import { convertDocumentListToCamelCase } from "../../../../utils/convertArrayToObject.js";
 
 export const createCommonDocuments = asyncHandler(async (req, res) => {
   try {

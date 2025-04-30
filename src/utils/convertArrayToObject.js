@@ -11,6 +11,7 @@ export function convertDocumentListToCamelCase(documentList) {
     const [key, value] = Object.entries(doc)[0];
     formattedDocs[toCamelCase(key)] = value;
   }
+  console.log("formattedDocs", formattedDocs);
 
   return formattedDocs;
 }

@@ -22,7 +22,7 @@ export const getAllCommonPendingService = asyncHandler(async (req, res) => {
     const getRequest = await CommonServices.find({
       serviceStatus: serviceStatus,
       department: req.departmentManager.department,
-      serviceNumber: serviceNumber,
+      // serviceNumber: serviceNumber,
     })
       .sort({ _id: -1 })
       .limit(limit)
