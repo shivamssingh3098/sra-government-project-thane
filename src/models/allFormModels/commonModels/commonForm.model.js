@@ -26,6 +26,7 @@ const commonFormSchema = new Schema(
     },
     paymentDate: {
       type: Date,
+      default: null,
     },
     paymentStatus: {
       type: String,
@@ -67,6 +68,7 @@ const commonFormSchema = new Schema(
 
     applyDate: {
       type: Date,
+      default: null,
     },
     phone: {
       type: String,
@@ -144,9 +146,11 @@ const commonFormSchema = new Schema(
     },
     leavingDate: {
       type: Date,
+      default: null,
     },
     spouseDeathDate: {
       type: Date,
+      default: null,
     },
     competentAuthorityNo: {
       type: String,
