@@ -54,7 +54,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         spouseDeathDate,
         competentAuthorityNo,
         annexure2SrNoInRehabilitationScheme,
-
+        rehabilitationScheme,
         areaCode,
       } = req.body;
       let { municipalCorporation, cityCouncil, villageCouncil } = req.body;
@@ -192,7 +192,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         spouseDeathDate,
         competentAuthorityNo,
         annexure2SrNoInRehabilitationScheme,
-
+        rehabilitationScheme,
         areaCode,
 
         IsSubmit: true,

@@ -89,7 +89,9 @@ const commonFormSchema = new Schema(
     village: {
       type: String,
     },
-
+    rehabilitationScheme: {
+      type: String,
+    },
     // area code
     landNumber: {
       // area code

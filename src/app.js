@@ -31,30 +31,23 @@ const allowedOrigins = [
   process.env.CORS_ORIGIN, // For local
   "http://13.201.123.101:3000",
   "http://13.201.123.101",
-"http://ec2-65-0-93-255.ap-south-1.compute.amazonaws.com", // For production development
+  "http://ec2-65-0-93-255.ap-south-1.compute.amazonaws.com", // For production development
 ];
 
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
-// app.use(
-//   cors({
-//     origin: "",
-//     credentials: true,
-//   })
-// );
-
-app.use(cors());
+// app.use(cors());
 
 app.use(express.json({ limit: "20kb" }));
 app.use(express.urlencoded({ extended: true, limit: "20kb" }));
