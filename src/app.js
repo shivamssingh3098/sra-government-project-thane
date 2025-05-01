@@ -29,7 +29,9 @@ const app = express();
 // ✅ CORS Configuration
 const allowedOrigins = [
   process.env.CORS_ORIGIN, // For local
-  "http://ec2-65-0-93-255.ap-south-1.compute.amazonaws.com", // For production development
+  "http://13.201.123.101:3000",
+  "http://13.201.123.101",
+"http://ec2-65-0-93-255.ap-south-1.compute.amazonaws.com", // For production development
 ];
 
 app.use(
