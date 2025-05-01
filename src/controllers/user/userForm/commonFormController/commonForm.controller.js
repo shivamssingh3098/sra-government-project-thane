@@ -39,9 +39,6 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         surveyNo,
         finalPlot,
         //optional
-        municipalCorporation,
-        cityCouncil,
-        villageCouncil,
 
         // all other  fields
 
@@ -60,6 +57,21 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
 
         areaCode,
       } = req.body;
+      let { municipalCorporation, cityCouncil, villageCouncil } = req.body;
+      if (villageCouncil == "") {
+        console.log("municipalCorporation", villageCouncil);
+
+        villageCouncil = "NONE";
+      }
+      if (cityCouncil == "") {
+        console.log("municipalCorporation", cityCouncil);
+        cityCouncil = "NONE";
+      }
+      if (municipalCorporation == "") {
+        console.log("municipalCorporation", municipalCorporation);
+        municipalCorporation = "NONE";
+      }
+      console.log("municipalCorporation", municipalCorporation);
 
       //  i have removed validation
       // form1Validation([
@@ -79,6 +91,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
           throw new ApiError(400, "Scheme Developer is required");
         }
       // not mandatory for service 10 and 13
+      console.log("serviceNumber", serviceNumber);
 
       if (serviceNumber !== 10 && serviceNumber !== 13) {
         if (
@@ -86,6 +99,8 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
           (!cityCouncil || cityCouncil === "NONE") &&
           (!villageCouncil || villageCouncil === "NONE")
         ) {
+          municipalCorporation === "NONE";
+
           throw new ApiError(
             400,
             "municipalCorporation or cityCouncil or villageCouncil fields are required"
@@ -128,12 +143,14 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
           `Invalid serviceStatus. Allowed values: ${DEPARTMENT.join(", ")}`
         );
       }
+      console.log("department", department);
+
       const departmentManager = await DepartmentManager.findOne(
         { department },
         { fullName: 1, _id: 0 }
       );
 
-      // console.log("departmentManager", departmentManager);
+      console.log("departmentManager", departmentManager);
 
       const applicationId = generateApplicationId();
       const expectingDate = getDate(15);
