@@ -81,6 +81,8 @@ const registerUser = asyncHandler(async (req, res) => {
     if (!profileImage) {
       throw new ApiError(400, "Photo is required");
     }
+    console.log("profileImage -- ", profileImage);
+
     const profilePhoto = await uploadOnCloudinary(profileImage);
     if (!profilePhoto) {
       throw new ApiError(400, "Profile Photo is required");
