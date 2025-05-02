@@ -66,6 +66,7 @@ router.route("/documents-upload").post(
     { name: "affidavit", maxCount: 1 },
     { name: "certifiedNOCFromCooperativeHousingSociety", maxCount: 1 },
     { name: "otherDocument", maxCount: 1 },
+    { name: "personVoterID", maxCount: 1 },
   ]),
   createCommonFormDocument
 );

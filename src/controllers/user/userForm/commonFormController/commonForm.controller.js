@@ -32,6 +32,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         //optional
         sectorNo,
         wardNo,
+        wardType,
         //end optional
 
         //optional
@@ -179,6 +180,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         finalPlot,
         sectorNo,
         wardNo,
+        wardType,
         // other fields
         redevelopmentServicesNo,
         hutNo,
