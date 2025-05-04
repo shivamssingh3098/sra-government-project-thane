@@ -34,6 +34,7 @@ const allowedOrigins = [
   "http://ec2-65-0-93-255.ap-south-1.compute.amazonaws.com", // For production development
   "http://localhost:3000",
   "http://192.168.1.155:8080",
+  "http://192.168.1.155:3000",
   "https://sra-government-project-thane-1.onrender.com",
 ];
 

@@ -14,7 +14,7 @@ import { form1Validation } from "../../../../utils/validateRequiredFields.js";
 export const createCommonFormsTest = asyncHandler(async (req, res) => {
   try {
     const serviceNumber = Number(req.body.serviceNumber);
-    console.log("serviceNumber", serviceNumber);
+    console.log("serviceNumber ----------", serviceNumber);
 
     if (serviceNumber >= 1 && serviceNumber <= 22) {
       const {
@@ -141,7 +141,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         throw new ApiError(
           401,
 
-          `Invalid serviceStatus. Allowed values: ${DEPARTMENT.join(", ")}`
+          `Invalid DEPARTMENT ${department}. Allowed values: ${DEPARTMENT.join(", ")}`
         );
       }
       console.log("department", department);
@@ -238,7 +238,7 @@ export const getSpecificFormData = asyncHandler(async (req, res) => {
     if (!response) {
       throw new ApiError(404, "Service not found");
     }
-    console.log("response serviceData", response);
+    console.log("response serviceData", response.serviceNumber);
 
     // If documents exist and have documentList, convert to camelCase object
     if (response.documents?.documentList) {

@@ -347,7 +347,7 @@ export const createCommonFormDocument = async (req, res) => {
     const { serviceNumber } = req.body;
     const _id = req.query.formId;
 
-    console.log("uploadedFiles", uploadedFiles);
+    // console.log("uploadedFiles", uploadedFiles);
 
     // Dynamically generate docs array
     const docsArray = [];
@@ -366,6 +366,7 @@ export const createCommonFormDocument = async (req, res) => {
       documentList: docsArray,
       IsSubmit: true,
     });
+    console.log("createdCommonFormDocument", createdCommonFormDocument);
 
     if (!createdCommonFormDocument) {
       throw new ApiError(
@@ -373,10 +374,11 @@ export const createCommonFormDocument = async (req, res) => {
         "Something went wrong while creating the document"
       );
     }
-
+    console.log("_id form id", _id);
     const updateNoc = await CommonServices.findByIdAndUpdate(_id, {
       documents: createdCommonFormDocument._id,
     });
+    console.log("updated service after document created ", updateNoc);
 
     return res
       .status(201)

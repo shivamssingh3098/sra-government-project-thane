@@ -259,7 +259,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 const currentUser = asyncHandler(async (req, res) => {
   try {
-    console.log("getting current user", req.user);
+    // console.log("getting current user", req.user);
     res
       .status(200)
       .json(new ApiResponse(200, { user: req.user }, "Current user"));
