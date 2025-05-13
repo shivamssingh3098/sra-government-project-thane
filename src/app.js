@@ -33,6 +33,7 @@ const allowedOrigins = [
   "http://13.201.123.101",
   "http://ec2-65-0-93-255.ap-south-1.compute.amazonaws.com", // For production development
   "http://localhost:3000",
+  "http://localhost:3001",
   "http://192.168.1.155:8080",
   "http://192.168.1.155:3000",
   "https://sra-government-project-thane-1.onrender.com",
@@ -53,8 +54,8 @@ app.use(
 
 // app.use(cors());
 
-app.use(express.json({ limit: "20kb" }));
-app.use(express.urlencoded({ extended: true, limit: "20kb" }));
+app.use(express.json({ limit: "20mb" }));
+app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 

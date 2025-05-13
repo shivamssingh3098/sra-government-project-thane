@@ -44,6 +44,7 @@ const registerDepartmentManager = asyncHandler(async (req, res) => {
       village,
       password,
       department,
+      userType,
     } = req.body;
 
     console.log("req.files", req.file);
@@ -91,6 +92,7 @@ const registerDepartmentManager = asyncHandler(async (req, res) => {
     if (!profilePhoto) {
       throw new ApiError(400, "Profile Photo is required");
     }
+    console.log("userType", userType);
 
     const departmentManager = await DepartmentManager.create({
       userName: userName.toLowerCase(),
@@ -105,6 +107,7 @@ const registerDepartmentManager = asyncHandler(async (req, res) => {
       taluk,
       village,
       department,
+      userType,
       profileImage: profilePhoto.url,
     });
 

@@ -19,11 +19,18 @@ export const getAllCommonPendingService = asyncHandler(async (req, res) => {
       serviceNumber
     );
 
-    const getRequest = await CommonServices.find({
+    const isAdmin = req.departmentManager.department === "ADMIN";
+
+    const query = {
       serviceStatus: serviceStatus,
-      department: req.departmentManager.department,
-      // serviceNumber: serviceNumber,
-    })
+    };
+
+    // Only add `department` filter if not admin
+    if (!isAdmin) {
+      query.department = req.departmentManager.department;
+    }
+
+    const getRequest = await CommonServices.find(query)
       .sort({ _id: -1 })
       .limit(limit)
       .skip(skip);
@@ -102,25 +109,32 @@ export const updateCommonFormStatus = asyncHandler(async (req, res) => {
 export const getServiceStatusCountsByDepartment = async (req, res) => {
   try {
     const userDepartment = req.departmentManager?.department;
+    console.log("userDepartment", userDepartment);
 
     if (!userDepartment) {
       throw new ApiError(400, "Department information is missing in request");
     }
 
-    // Filter documents by department and group by serviceStatus
-    const statusCounts = await CommonServices.aggregate([
-      {
+    const pipeline = [];
+    // if userDepartment is admin then no need to match department and get all the data,
+    if (userDepartment !== "ADMIN") {
+      pipeline.push({
         $match: {
           department: userDepartment,
         },
+      });
+    }
+
+    pipeline.push({
+      $group: {
+        _id: "$serviceStatus",
+        count: { $sum: 1 },
       },
-      {
-        $group: {
-          _id: "$serviceStatus",
-          count: { $sum: 1 },
-        },
-      },
-    ]);
+    });
+
+    // Filter documents by department and group by serviceStatus
+
+    const statusCounts = await CommonServices.aggregate(pipeline);
 
     // Prepare response with default 0 values
     const response = {

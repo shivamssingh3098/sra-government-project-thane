@@ -59,7 +59,9 @@ const commonFormSchema = new Schema(
       ref: "CommonRemark",
       // here add remark model and update letter when admin or manager will give remark with document
     },
-
+    remarkByAdminForManager: {
+      type: String,
+    },
     documents: {
       type: Schema.Types.ObjectId,
       ref: "CommonFormDocument", // need to change form common
@@ -154,6 +156,12 @@ const commonFormSchema = new Schema(
       type: Date,
       default: null,
     },
+
+    deathCertificateHusbandWifeSonDaughter: {
+      type: Date,
+      default: null,
+    },
+
     competentAuthorityNo: {
       type: String,
     },

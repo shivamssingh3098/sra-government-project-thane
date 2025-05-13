@@ -8,6 +8,8 @@ export const verifyJWTDepartmentManager = asyncHandler(async (req, _, next) => {
     const token =
       req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");
+    console.log("department token check", token);
+
     if (!token) {
       throw new ApiError(401, "Unauthorized request");
     }

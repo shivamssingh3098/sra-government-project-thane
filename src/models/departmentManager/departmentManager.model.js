@@ -62,6 +62,7 @@ const departmentManagerSchema = new Schema(
     userType: {
       type: String,
       default: "DEPARTMENT_MANAGER",
+      enum: ["ADMIN", "DEPARTMENT_MANAGER"],
     },
     department: {
       type: String,

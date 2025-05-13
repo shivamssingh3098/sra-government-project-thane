@@ -71,3 +71,44 @@ export const createCommonRemark = asyncHandler(async (req, res) => {
     throw new ApiError(401, error || "Error while creating Remark");
   }
 });
+
+export const createAdminRemarkForManagers = asyncHandler(async (req, res) => {
+  try {
+    const { remarkByAdminForManager } = req.body;
+    const { formId } = req.query;
+
+    console.log("formId", formId);
+    console.log("req.body", req.body);
+    console.log("remarkByAdminForManager", remarkByAdminForManager);
+    if (!formId) {
+      throw new ApiError(401, "Form id is required");
+    }
+
+    if (!remarkByAdminForManager) {
+      throw new ApiError(401, "Text field is required");
+    }
+
+    const updateService = await CommonServices.findByIdAndUpdate(
+      { _id: formId },
+      { $set: { remarkByAdminForManager: remarkByAdminForManager } },
+      { new: true }
+    );
+    // console.log("updateService", updateService?.remarkByAdminForManager);
+
+    return res
+      .status(201)
+      .json(
+        new ApiResponse(
+          200,
+          updateService,
+          "Remark created by admin successfully"
+        )
+      );
+  } catch (error) {
+    console.log("Error while creating admin remark for managers", error);
+    throw new ApiError(
+      400,
+      error || "Error while creating admin remark for managers"
+    );
+  }
+});

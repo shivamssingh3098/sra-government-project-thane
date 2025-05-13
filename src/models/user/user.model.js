@@ -4,14 +4,14 @@ import bcrypt from "bcrypt";
 
 const userSchema = new Schema(
   {
-    userName: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
-      index: true,
-    },
+    // userName: {
+    //   type: String,
+    //   required: true,
+    //   unique: true,
+    //   lowercase: true,
+    //   trim: true,
+    //   index: true,
+    // },
     email: {
       type: String,
       required: true,
@@ -91,7 +91,7 @@ userSchema.methods.generateAccessToken = function () {
     {
       _id: this._id,
       email: this.email,
-      userName: this.userName,
+
       fullName: this.fullName,
       phone: this.phone,
     },

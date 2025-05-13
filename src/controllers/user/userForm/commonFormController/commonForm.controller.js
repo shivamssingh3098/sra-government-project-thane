@@ -57,6 +57,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         annexure2SrNoInRehabilitationScheme,
         rehabilitationScheme,
         areaCode,
+        deathCertificateHusbandWifeSonDaughter,
       } = req.body;
       let { municipalCorporation, cityCouncil, villageCouncil } = req.body;
       if (villageCouncil == "") {
@@ -136,7 +137,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
           throw new ApiError(400, "sectorNo or wardNo fields are required");
         }
       }
-
+      console.log("department", department);
       if (!DEPARTMENT.includes(department)) {
         throw new ApiError(
           401,
@@ -196,7 +197,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
         annexure2SrNoInRehabilitationScheme,
         rehabilitationScheme,
         areaCode,
-
+        deathCertificateHusbandWifeSonDaughter,
         IsSubmit: true,
         userId: req.user._id,
         applicationId: applicationId,
