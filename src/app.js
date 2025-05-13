@@ -37,6 +37,7 @@ const allowedOrigins = [
   "http://192.168.1.155:8080",
   "http://192.168.1.155:3000",
   "https://sra-government-project-thane-1.onrender.com",
+  "https://srammrrts.in",
 ];
 
 app.use(
