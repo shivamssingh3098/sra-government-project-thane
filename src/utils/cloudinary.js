@@ -14,17 +14,17 @@ console.log(
 // CLOUDINARY_API_KEY = 385278456424974;
 // CLOUDINARY_API_SECRET = KLLak1RknInIRL3_DBLoaZzDrRc;
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 // cloudinary.config({
-//   cloud_name: "dm6zltpzm",
-//   api_key: "385278456424974",
-//   api_secret: "KLLak1RknInIRL3_DBLoaZzDrRc",
+//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+//   api_secret: process.env.CLOUDINARY_API_SECRET,
 // });
+
+cloudinary.config({
+  cloud_name: "dm6zltpzm",
+  api_key: "385278456424974",
+  api_secret: "KLLak1RknInIRL3_DBLoaZzDrRc",
+});
 
 const uploadOnCloudinary = async (localFilePath) => {
   try {
