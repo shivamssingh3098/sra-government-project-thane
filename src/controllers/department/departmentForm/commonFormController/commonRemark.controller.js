@@ -52,9 +52,11 @@ export const createCommonRemark = asyncHandler(async (req, res) => {
     }
     const documentUpload = await uploadOnCloudinary(req.file?.path);
 
+    console.log("documentUpload url", documentUpload);
+
     const createRemark = await CommonRemark.create({
       remark,
-      document: documentUpload.url,
+      document: documentUpload?.secure_url,
       addedBy: addedByPersonId,
       form: formId,
       addedByModel: addedByPerson,

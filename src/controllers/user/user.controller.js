@@ -97,7 +97,7 @@ const registerUser = asyncHandler(async (req, res) => {
       address,
       taluk,
       village,
-      profileImage: profilePhoto.url,
+      profileImage: profilePhoto?.secure_url,
     });
 
     const createdUser = await User.findById(user._id).select(

@@ -354,8 +354,10 @@ export const createCommonFormDocument = async (req, res) => {
 
     // Only push if file is uploaded
     for (const key in uploadedFiles) {
-      if (uploadedFiles[key]?.url) {
-        docsArray.push({ [formatFieldName(key)]: uploadedFiles[key].url });
+      if (uploadedFiles[key]?.secure_url) {
+        docsArray.push({
+          [formatFieldName(key)]: uploadedFiles[key].secure_url,
+        });
       }
     }
     console.log("docsArray", docsArray);
