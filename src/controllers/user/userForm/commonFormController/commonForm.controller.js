@@ -88,7 +88,7 @@ export const createCommonFormsTest = asyncHandler(async (req, res) => {
       // ]);
       console.log("Service 1 selected, schemeDeveloper", schemeDeveloper);
 
-      if (serviceNumber >= 1 && serviceNumber <= 2)
+      if ((serviceNumber >= 1 && serviceNumber <= 2) || serviceNumber == 8)
         if (!schemeDeveloper) {
           throw new ApiError(400, "Scheme Developer is required");
         }
